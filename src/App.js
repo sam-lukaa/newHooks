@@ -25,13 +25,15 @@ export default function App() {
         <div>
           {data.results.map((user) => (
             <div key={user.login.uuid}>
+              <img src={user.picture.medium} alt="user" />
               <p>Gender: {user.gender}</p>
               <p>
                 Name: {user.name.last} {user.name.first}
               </p>
               <p>Email: {user.email}</p>
               <p>Phone: {user.phone}</p>
-              <img src={user.picture.medium} alt="user" />
+              <br />
+              <br />
             </div>
           ))}
         </div>
@@ -46,5 +48,3 @@ export default function App() {
     </div>
   );
 }
-
-// ! Never forget await.

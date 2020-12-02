@@ -6,13 +6,11 @@ function Reducer(state, action) {
       return {
         ...state,
         loading: true,
-        error: false,
       };
     case "SUCCESS_FETCH":
       return {
         ...state,
         loading: false,
-        error: false,
         data: payload,
       };
     case "FAIL_FETCH":

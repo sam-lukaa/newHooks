@@ -2,7 +2,7 @@ import { useReducer, useEffect } from "react";
 import axios from "axios"
 import Reducer from "../reducer/index";
 
-const useDataApi = (initialUrl, initialData, result) => {
+const useDataApi = (initialUrl, initialData) => {
   const url = initialUrl;
 
   const [state, dispatch] = useReducer(Reducer, {
