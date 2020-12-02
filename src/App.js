@@ -24,7 +24,7 @@ export default function App() {
       ) : (
         <div>
           {data.results.map((user) => (
-            <div>
+            <div key={user.login.uuid}>
               <p>Gender: {user.gender}</p>
               <p>
                 Name: {user.name.last} {user.name.first}
