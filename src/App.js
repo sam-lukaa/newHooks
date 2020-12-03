@@ -20,18 +20,32 @@ export default function App() {
       {error && <h4>Something went wrong</h4>}
 
       {loading ? (
-        <h4>Loading...</h4>
+        <h4>Users data loading...</h4>
       ) : (
         <div>
+          <Pagination
+            totalRecords={totalRecords}
+            pageLimit={pageLimit}
+            pageRangeDisplayed={1}
+            onChangePage={setCurrentPage}
+          />
+          <br />
+          <br />
           {data.results.map((user) => (
             <div key={user.login.uuid}>
               <img src={user.picture.medium} alt="user" />
-              <p>Gender: {user.gender}</p>
               <p>
-                Name: {user.name.last} {user.name.first}
+                <b>Gender</b>: {user.gender}
               </p>
-              <p>Email: {user.email}</p>
-              <p>Phone: {user.phone}</p>
+              <p>
+                <b>Name:</b> {user.name.last} {user.name.first}
+              </p>
+              <p>
+                <b>Email:</b> {user.email}
+              </p>
+              <p>
+                <b>Phone: </b> {user.phone}
+              </p>
               <br />
               <br />
             </div>

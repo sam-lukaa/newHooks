@@ -34,3 +34,19 @@ Basically, what we will be doing here is to both consume the reducer by making u
 Furthermore, whenever we are making use of useEffect, we need axios to actually carry out the type of request(get, post...), so also import axios from "axios"
 
 Also, since we are consuming the reducer we created earlier on, let's import it as well.
+
+We want to make the "useEffect" and "useReducer" functions globally accessible, so we create a parent function called "useDataApi()". Now there are quite a few numbers of reasons why we are creating the parent function, but the major reason is that we want to be able to use this particular function to call as many API as we want, rather than creating new useEffect and useReducer function for each API calling, we just have one(useDataApi).
+
+But how do we really make that possible? We know that whenever we want to use APIs, about two or more, the only thing that will defer them from each other are the url we will make request to, and the data we get from the request. So, to actually make this useDataApi universally/globally useable, we will pass in these two things that do defer in API calling(url, data) as a callback for the function.
+
+First thing we want to do is to set whatever url we are getting from the function consuming the useDataApi function(useUrl), to a variable(url).
+
+The reducer here in useReducer(Reducer, {...}) is the constant we defined earlier. These names need to match in order to use the reducer we defined. Same with our initial state as we just defined, which we used a few lines back. Name the two constants whatever suits your taste, as long as they match up. "state" represents the intitializations(loading, error...) in our store being passed in and dispatch is sort of an alias for action in our reducer. Notice the data set to "initialData", in the consumer part as in our case, "App.js", we will set the initialData to an empty array, which simply means, in this our initial state, the data is an empty array.
+
+Now to the useEffect section. We made use of async-await and try-catch. So, when the link is been fetched initially, we want to dispatch the action case we created earlier in the reducer(INIT_FETCH). When the API is now been fetched, we want to do a few things, such as receiving and storing the data gotten from the get request, using "await axios.get(url)". Wondering where the url came from? Worry not, it is the url we recieved from the callback function, remember?? Now we are setting the payload to the data of the response(res.data). Note that the "data" in "res.data" has nothing to do with data state in the useReducer(data: initialData). Then when an error occurs, we want to dispatch the action case of "FAIL_FETCH" within the catch block. Remember we set data to payload in the "Reducer", now in our actions file, we are setting that payload to be the response from the API, meaning data state which we created is now the response from API upon fetch request.
+
+Afterwards, outside the "fetchData" function, we want to make useEffect aware that it should use that function for the fetching, we return it(fetchData()). But there's something important we haven't talked about and that is how we frequent or on what basis should the useEffect be rendered. Really, we want it to re-render only when the api/url changes, and only that time alone. So what we have to do is to pass it into the useEffect([url]);
+
+So finally(pheww), after everything, we want to return our state. Why? The state is holding the the initial values of loading, data... and we want to be able to destructure them whenever they are called to be used, as in our "App.js".
+
+## Next up is the App.js(comsumer, I call it)
