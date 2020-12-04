@@ -50,3 +50,19 @@ Afterwards, outside the "fetchData" function, we want to make useEffect aware th
 So finally(pheww), after everything, we want to return our state. Why? The state is holding the the initial values of loading, data... and we want to be able to destructure them whenever they are called to be used, as in our "App.js".
 
 ## Next up is the App.js(comsumer, I call it)
+In this section, we will be applying the useDataApi in the App.js. If you notice, we created the Reducer function and used it in useDataApi, now we are using the useDataApi function in the App.js file.
+
+Remember, in the useDataApi where we returned the state object? Yeah, we will be destructuring the data within it, such as "data, loading...".
+Also, remember the callbacks, "initialUrl, initialData"? We will be setting their values here as well. So that's what we have this section
+"
+  const [{ data, loading, error, pageLimit, totalRecords }] = useDataApi(
+    `https://randomuser.me/api/?page=${currentPage}&results=${result}`,
+    {
+      results: [],
+    }
+  );
+"
+
+Then in our return section, we use the data we got back as response from the API.
+
+# And that's it, we have come to the very end of this documentation. Thanks for reading.

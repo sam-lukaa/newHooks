@@ -6,12 +6,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const result = 10;
 
-  const [{ data, loading, error, pageLimit, totalRecords }] = useDataApi(
-    `https://randomuser.me/api/?page=${currentPage}&results=${result}`,
-    {
-      results: [],
-    }
-  );
+  =
 
   return (
     <div>
